@@ -1,0 +1,59 @@
+.main-title {
+  padding-left: 2%;
+  text-align: left;
+  font-style: oblique;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  flex-direction: row;
+}
+
+button:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+@media all and (max-width: 30em) {
+   .button {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 3;
+  justify-content: flex-start;
+  padding-top: 2%;
+}
+
+.container .main-title {
+  text-align: left;
+}
+
+/* Landing Page Background Image */
+/* body,
+html {
+  height: 100%;
+}
+
+.landing-image {
+  background-image: url("https://www.unitedvanlines.com/wp-content/uploads/2019/10/GettyImages-588590608-1600x1067.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
