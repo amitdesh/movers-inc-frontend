@@ -4,6 +4,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
+        <h1>Movers Inc.</h1>
         <button className="button">
           <h3>Login</h3>
         </button>
