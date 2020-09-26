@@ -1,17 +1,23 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <h1>Movers Inc.</h1>
-        <button className="button">
-          <h3>Login</h3>
-        </button>
-        <button className="button">
-          <h3>Sign-up</h3>
-        </button>
-        {/* <h3>Welcome {this.props.name}</h3> */}
+        <NavLink to="/welcome">
+          <h1>Movers Inc.</h1>
+        </NavLink>
+        <NavLink to="/login">
+          <button className="button">
+            <h3>Login</h3>
+          </button>
+        </NavLink>
+        <NavLink to="/signup">
+          <button className="button">
+            <h3>Sign-up</h3>
+          </button>
+        </NavLink>
       </div>
     );
   }
