@@ -8,7 +8,10 @@ class LoginForm extends React.Component {
 
   localSubmitHandler = (e) => {
     e.preventDefault();
-    this.props.submitHandler(this.state);
+    this.props.loginHandler(this.state);
+    this.setState({
+      [e.target.name]: "",
+    });
   };
 
   changeHandler = (e) => {
