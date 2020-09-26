@@ -3,7 +3,7 @@ import LoginForm from "../Forms/loginform";
 
 class LoginContainer extends React.Component {
   renderLoginForm = () => {
-    return <LoginForm />;
+    return <LoginForm submitHandler={this.props.submitHandler} />;
   };
 
   render() {

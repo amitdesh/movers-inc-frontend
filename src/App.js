@@ -13,7 +13,7 @@ class App extends React.Component {
     user: null,
   };
 
-  submitHandler = (userObj) => {
+  signupHandler = (userObj) => {
     this.postRequest(userObj);
   };
 
@@ -24,7 +24,7 @@ class App extends React.Component {
         "content-type": "application/json",
         accept: "application/json",
       },
-      body: JSON.stringify(userObj),
+      body: JSON.stringify({ user: userObj }),
     };
 
     fetch("http://localhost:3000/users", options)
@@ -34,20 +34,43 @@ class App extends React.Component {
       });
   };
 
+  loginHandler = (userObj) => {
+    this.loginRequest(userObj);
+  };
+
+  loginRequest = (userObj) => {
+    let options = {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        Authorization: "Nearer <token>",
+      },
+    };
+    fetch("http://localhost:3000/users/profile", options)
+      .then((resp) => resp.json())
+      .then(console.log);
+  };
+
   render() {
     return (
       <div>
         <NavBar />
         <Route
           path="/login"
-          render={() => <LoginForm user={this.state.user} />}
+          render={() => (
+            <LoginForm
+              user={this.state.user}
+              submitHandler={this.loginHandler}
+            />
+          )}
         />
         <Route
           path="/signup"
           render={() => (
             <SignupContainer
               user={this.state.user}
-              submitHandler={this.submitHandler}
+              submitHandler={this.signupHandler}
             />
           )}
         />
