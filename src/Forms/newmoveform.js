@@ -1,8 +1,24 @@
 import React from "react";
 
 class NewMoveForm extends React.Component {
+  state = {
+    destination: "",
+    inventory: "",
+    date: "",
+    time: "",
+  };
+
   render() {
-    return <h1>this is a new move form</h1>;
+    return (
+      <div>
+        <h1>Schedule a New Move</h1>
+        <form>
+        <h1></h1></h1>
+
+
+        </form>
+      </div>
+    );
   }
 }
 

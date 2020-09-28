@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
+import NewMoveForm from "../Forms/newmoveform";
 
 class UserProfile extends React.Component {
   render() {
     console.log(this.props.profileData);
-    return (
+    return this.props.profileData ? (
       <div>
         <h1>Welcome to Movers Inc, {this.props.profileData.username}</h1>
         <h3>Current Profile Details</h3>
@@ -14,6 +15,8 @@ class UserProfile extends React.Component {
         </NavLink>
         <h3>View All Move Requests</h3>
       </div>
+    ) : (
+      <h1>Profile is loading</h1>
     );
   }
 }

@@ -6,6 +6,7 @@ import "./welcome/welcome.css";
 import SignupContainer from "./Containers/signupcontainer";
 import ProfileContainer from "./Containers/profilecontainer";
 import LoginContainer from "./Containers/logincontainer";
+import NewMoveForm from "./Forms/newmoveform";
 
 class App extends React.Component {
   state = {
@@ -16,6 +17,25 @@ class App extends React.Component {
     this.setState(() => ({
       user: userObj,
     }));
+  };
+
+  componentDidUpdate = () => {
+    let userID = this.state.user.id;
+    this.getUser(userID);
+  };
+
+  getUser = (userID) => {
+    let options = {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    fetch(`http://localhost:3000/users/${userID}`, options)
+      .then((resp) => resp.json())
+      .then(console.log);
   };
 
   render() {
@@ -38,6 +58,10 @@ class App extends React.Component {
           <Route
             path="/profile"
             render={() => <ProfileContainer profileData={this.state.user} />}
+          />
+          <Route
+            path="/newmoveform"
+            render={() => <NewMoveForm profileData={this.state.user} />}
           />
         </Switch>
       </div>

@@ -18,6 +18,11 @@ class NavBar extends React.Component {
             <h3>Sign-up</h3>
           </button>
         </NavLink>
+        <NavLink to="/profile">
+          <button className="button">
+            <h3>Profile Page</h3>
+          </button>
+        </NavLink>
       </div>
     );
   }
