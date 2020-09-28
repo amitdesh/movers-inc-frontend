@@ -3,7 +3,6 @@ import React from "react";
 class NewMoveForm extends React.Component {
   state = {
     location: "",
-    inventory: "",
     date: "",
     time: "",
   };
@@ -24,7 +23,6 @@ class NewMoveForm extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h1>Schedule a New Move</h1>
@@ -32,10 +30,10 @@ class NewMoveForm extends React.Component {
           <label for="destination">Moving Destination</label>
           <input
             type="text"
-            name="destination"
+            name="location"
             required
             placeholder="Enter Destination"
-            value={this.state.destination}
+            value={this.state.location}
             onChange={this.onChangeHandler}
           />
           <label for="date">Moving Date</label>
@@ -52,7 +50,7 @@ class NewMoveForm extends React.Component {
             type="time"
             min="08:00"
             max="17:00"
-            step="1800"
+            step="600"
             required
             name="time"
             placeholder="Enter desired time slot"

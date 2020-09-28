@@ -21,14 +21,13 @@ class SignupContainer extends React.Component {
       .then((resp) => resp.json())
       .then((data) => {
         localStorage.setItem("token", data.jwt);
-        this.props.setUser(data.user);
+        this.props.setUser(data);
         if (this.props.user) {
           this.props.history.push(`/profile`);
         } else {
           alert("Username is already taken. Please try another username");
           this.props.history.push(`/signup`);
         }
-        console.log(data);
       });
   };
 

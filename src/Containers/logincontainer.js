@@ -23,14 +23,13 @@ class LoginContainer extends React.Component {
       .then((resp) => resp.json())
       .then((data) => {
         localStorage.setItem("token", data.jwt);
-        this.props.setUser(data.user);
+        this.props.setUser(data);
         if (this.props.user) {
           this.props.history.push(`/profile`);
         } else {
           alert("Unable to log-in. Please try again");
           this.props.history.push(`/login`);
         }
-        console.log(data);
       });
   };
 

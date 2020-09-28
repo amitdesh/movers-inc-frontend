@@ -59,10 +59,6 @@ class App extends React.Component {
             path="/profile"
             render={() => <ProfileContainer profileData={this.state.user} />}
           />
-          <Route
-            path="/newmoveform"
-            render={() => <NewMoveForm profileData={this.state.user} />}
-          />
         </Switch>
       </div>
     );
