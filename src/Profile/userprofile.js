@@ -18,6 +18,7 @@ class UserProfile extends React.Component {
 
   submitHandler = (destinationObj) => {
     this.createDestination(destinationObj);
+    this.createInventory(destinationObj);
   };
 
   createDestination = (destObj) => {

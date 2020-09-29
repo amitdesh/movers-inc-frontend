@@ -8,13 +8,33 @@ class NewMoveForm extends React.Component {
     inventory: {
       sofa: 0,
       bed: 0,
-      couch: 0,
       desk: 0,
       table: 0,
       chair: 0,
       boxes: 0,
       appliances: 0,
+      plants: 0,
+      art: 0,
     },
+  };
+
+  updateCount = (e) => {
+    console.log(e);
+    let item = e.target.name;
+    this.setState(() => ({ [item]: e.target.value }));
+  };
+
+  incrementItem = (e) => {
+    e.persist();
+    let item = e.target.name;
+    console.log(e.target.name);
+    this.setState(() => ({ [item]: this.state.inventory.item + 1 }));
+  };
+  decrementItem = (e) => {
+    e.persist();
+    let item = e.target.name;
+    console.log(e.target.name);
+    this.setState(() => ({ [item]: this.state.inventory.item - 1 }));
   };
 
   capitalize = (str) => {
@@ -30,21 +50,15 @@ class NewMoveForm extends React.Component {
   };
 
   onChangeHandler = (e) => {
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     e.persist();
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
-  // displayInventory = () => {
-  //   let inventory = this.state.inventory;
-  //   for (let name in inventory) {
-  //     <li>{inventory[name]}</li>;
-  //   }
-  // };
-
   render() {
-    console.log(this.state.inventory);
+    let inventory = this.state.inventory;
     return (
       <div>
         <h1>Schedule a New Move</h1>
@@ -80,17 +94,22 @@ class NewMoveForm extends React.Component {
             onChange={this.onChangeHandler}
           />
           <h3>Moving Inventory</h3>
-          <ul>
-            {Object.keys(this.state.inventory).map(function (name) {
-              return (
-                <li>
-                  {name} - <button>-</button>
-                  <span>{this.state.inventory.name}</span>
-                  <button>+</button>
-                </li>
-              );
-            })}
-          </ul>
+          {Object.keys(inventory).map((inv) => {
+            return (
+              <div>
+                <span>{inv}</span> -
+                <span>
+                  <input
+                    type="number"
+                    name={inv}
+                    value={this.state.inventory.inv}
+                    onChange={this.onChangeHandler}
+                  />
+                </span>
+              </div>
+            );
+          })}
+
           <button type="submit">Submit Move Request</button>
         </form>
       </div>
