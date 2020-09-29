@@ -6,7 +6,6 @@ import "./welcome/welcome.css";
 import SignupContainer from "./Containers/signupcontainer";
 import ProfileContainer from "./Containers/profilecontainer";
 import LoginContainer from "./Containers/logincontainer";
-import NewMoveForm from "./Forms/newmoveform";
 
 class App extends React.Component {
   state = {
