@@ -5,55 +5,80 @@ class NewMoveForm extends React.Component {
     location: "",
     date: "",
     time: "",
-    inventory: {
-      sofa: 0,
-      bed: 0,
-      desk: 0,
-      table: 0,
-      chair: 0,
-      boxes: 0,
-      appliances: 0,
-      plants: 0,
-      art: 0,
-    },
+    inventory: [],
   };
 
-  updateCount = (e) => {
-    console.log(e);
-    let item = e.target.name;
-    this.setState(() => ({ [item]: e.target.value }));
-  };
-
-  incrementItem = (e) => {
-    e.persist();
-    let item = e.target.name;
-    console.log(e.target.name);
-    this.setState(() => ({ [item]: this.state.inventory.item + 1 }));
-  };
-  decrementItem = (e) => {
-    e.persist();
-    let item = e.target.name;
-    console.log(e.target.name);
-    this.setState(() => ({ [item]: this.state.inventory.item - 1 }));
-  };
-
-  capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
+  componentDidMount() {
+    let options = {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        Authorization: `Bearer ${this.props.profileData.jwt}`,
+      },
+    };
+    fetch("http://localhost:3000/inventories", options)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        this.setState(
+          () => ({
+            inventory: data,
+          }),
+          () => console.log(this.state)
+        );
+      });
+  }
 
   localSubmitHandler = (e) => {
     e.preventDefault();
-    this.props.submitHandler(this.state);
+    e.persist();
+    const requestBody = [
+      {
+        destination: {
+          location: e.target[0].value,
+          date: e.target[1].value,
+          time: e.target[2].value,
+          user_id: this.props.profileData.user.id,
+        },
+      },
+      {
+        invent: {
+          8: e.target[3].value,
+          9: e.target[4].value,
+          10: e.target[5].value,
+          11: e.target[6].value,
+          12: e.target[7].value,
+          13: e.target[8].value,
+          14: e.target[9].value,
+          15: e.target[10].value,
+        },
+      },
+    ];
+    // debugger;
+    this.props.submitHandler(requestBody);
     this.setState = {
       [e.target.name]: "",
     };
   };
 
   onChangeHandler = (e) => {
-    this.onChangeHandler = this.onChangeHandler.bind(this);
-    e.persist();
     this.setState({
       [e.target.name]: e.target.value,
+    });
+  };
+
+  renderInventory = () => {
+    return this.state.inventory.map((inv) => {
+      return (
+        <div>
+          <h3>{inv.name}</h3>
+          <h4>{inv.price}</h4>
+          <span>
+            <input type="number" name={inv.name} id={inv.id} />
+          </span>
+        </div>
+      );
     });
   };
 
@@ -94,22 +119,7 @@ class NewMoveForm extends React.Component {
             onChange={this.onChangeHandler}
           />
           <h3>Moving Inventory</h3>
-          {Object.keys(inventory).map((inv) => {
-            return (
-              <div>
-                <span>{inv}</span> -
-                <span>
-                  <input
-                    type="number"
-                    name={inv}
-                    value={this.state.inventory.inv}
-                    onChange={this.onChangeHandler}
-                  />
-                </span>
-              </div>
-            );
-          })}
-
+          <div>{this.renderInventory()}</div>
           <button type="submit">Submit Move Request</button>
         </form>
       </div>

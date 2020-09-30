@@ -7,6 +7,7 @@ class UserProfile extends React.Component {
   state = {
     user: [],
     destinations: [],
+    inventoriesName: [],
   };
 
   componentDidMount() {
@@ -16,12 +17,12 @@ class UserProfile extends React.Component {
     this.displayNewMovingApts(this.state.destinations);
   }
 
-  submitHandler = (destinationObj) => {
-    this.createDestination(destinationObj);
-    this.createInventory(destinationObj);
+  submitHandler = (requestBody) => {
+    this.createDestinationInventory(requestBody);
   };
 
-  createDestination = (destObj) => {
+  createDestinationInventory = (requestBody) => {
+    console.log(requestBody[0].destination, requestBody[1].invent);
     let options = {
       method: "POST",
       headers: {
@@ -30,36 +31,44 @@ class UserProfile extends React.Component {
         Authorization: `Bearer ${this.props.profileData.jwt}`,
       },
       body: JSON.stringify({
-        user_id: this.props.profileData.user.id,
-        location: destObj.location,
-        time: destObj.time,
-        date: destObj.date,
+        nested_array: requestBody,
+        destination_id: "",
+        inventory_id: "",
+        count: "",
       }),
     };
-    fetch("http://localhost:3000/destinations", options)
+    fetch("http://localhost:3000/destination_inventories", options)
       .then((resp) => resp.json())
       .then((data) => {
-        if (this.props.profileData) {
-          this.setState(() => ({
-            destinations: [...this.state.destinations, data.destination],
-          }));
-          this.props.history.push(`/profile`);
-          this.displayNewMovingApts(this.state.destinations);
-        } else {
-          alert("Unable to create new move request. Please try again.");
-          this.props.history.push(`/profile/newmoveform`);
-        }
+        console.log(data);
       });
   };
 
-  renderMoveForm = () => {
-    return <NewMoveForm submitHandler={this.submitHandler} />;
+  displayNewMovingApts = () => {
+    return this.state.destinations.map((dest) => {
+      return <AptInfo dest={dest} deleteHandler={this.deleteHandler} />;
+    });
   };
 
-  displayNewMovingApts = (destList) => {
-    return this.state.destinations.map((dest) => {
-      return <AptInfo dest={dest} />;
-    });
+  deleteHandler = (destID) => {
+    let options = {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        Authorization: `Bearer ${this.props.profileData.jwt}`,
+      },
+    };
+    fetch("http://localhost:3000/destinations/" + destID, options)
+      .then((resp) => resp.json())
+      .then((data) => {
+        let updatedDestination = this.state.destinations.filter(
+          (dest) => dest.id !== destID
+        );
+        this.setState({
+          destinations: updatedDestination,
+        });
+      });
   };
 
   render() {
@@ -69,7 +78,7 @@ class UserProfile extends React.Component {
         <h3>Current Profile Details</h3>
         <h3>Create a New Mover Request</h3>
         <NavLink to="/profile/newmoveform">
-          <button onClick={this.renderMoveForm}>Create New Move Request</button>
+          <button>Create New Move Request</button>
         </NavLink>
         <h3>View All Move Requests</h3>
         {this.displayNewMovingApts()}
@@ -80,6 +89,7 @@ class UserProfile extends React.Component {
               <NewMoveForm
                 submitHandler={this.submitHandler}
                 profileData={this.props.profileData}
+                inventory={this.state.inventories}
               />
             )}
           />
