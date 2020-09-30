@@ -7,13 +7,19 @@ class UserProfile extends React.Component {
   state = {
     user: [],
     destinations: [],
-    inventoriesName: [],
+    inventories: [],
   };
 
   componentDidMount() {
-    this.setState(() => ({
-      destinations: this.props.profileData.user.destinations,
-    }));
+    this.setState(
+      () => ({
+        destinations: this.props.profileData.user.destinations,
+        inventories: [this.props.profileData],
+      }),
+      () => {
+        console.log(this.state.destinations);
+      }
+    );
     this.displayNewMovingApts(this.state.destinations);
   }
 
@@ -41,13 +47,22 @@ class UserProfile extends React.Component {
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
+        this.setState(() => ({
+          destinations: data.user.destinations,
+          inventories: [data.destination.inventories],
+        }));
+        this.props.history.push(`/profile`);
       });
   };
 
   displayNewMovingApts = () => {
-    return this.state.destinations.map((dest) => {
-      return <AptInfo dest={dest} deleteHandler={this.deleteHandler} />;
-    });
+    return this.state.destinations.map((dest) => (
+      <AptInfo
+        dest={dest}
+        inv={this.state.inventories}
+        deleteHandler={this.deleteHandler}
+      />
+    ));
   };
 
   deleteHandler = (destID) => {
@@ -62,25 +77,36 @@ class UserProfile extends React.Component {
     fetch("http://localhost:3000/destinations/" + destID, options)
       .then((resp) => resp.json())
       .then((data) => {
-        let updatedDestination = this.state.destinations.filter(
-          (dest) => dest.id !== destID
-        );
-        this.setState({
-          destinations: updatedDestination,
-        });
+        if (data) {
+          let updatedDestination = this.state.destinations.filter(
+            (dest) => dest.id !== destID
+          );
+          this.setState({
+            destinations: updatedDestination,
+          });
+          this.props.history.push(`/profile`);
+        } else {
+          alert(
+            "Move delete request could not be submitted. Please try again."
+          );
+          this.props.history.push(`/profile`);
+        }
       });
   };
 
+  inventoryLister = () => {};
+
   render() {
+    console.log(this.state.inventories, this.props.profileData);
     return this.props.profileData ? (
       <div>
         <h1>Welcome to Movers Inc, {this.props.profileData.user.username}</h1>
         <h3>Current Profile Details</h3>
         <h3>Create a New Mover Request</h3>
         <NavLink to="/profile/newmoveform">
-          <button>Create New Move Request</button>
+          <button>Schedule a New Move</button>
         </NavLink>
-        <h3>View All Move Requests</h3>
+        <h3>Current Move Requests</h3>
         {this.displayNewMovingApts()}
         <Switch>
           <Route

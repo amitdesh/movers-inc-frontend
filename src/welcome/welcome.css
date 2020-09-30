@@ -1,11 +1,12 @@
-.main-title {
-  padding-left: 2%;
+.page-title {
+  padding-left: 10%;
   text-align: left;
-  font-style: oblique;
+  font-style: bold;
 }
 
 .button {
-  display: inline-block;
+  display: right;
+  align-content: right;
   padding: 0.35em 1.2em;
   border: 0.1em solid #ffffff;
   margin: 0 0.3em 0.3em 0;
@@ -36,16 +37,14 @@ button:hover {
   display: flex;
   flex-direction: row;
   flex-grow: 3;
-  justify-content: flex-start;
+  justify-content: flex-end;
   padding-top: 2%;
 }
 
-.container .main-title {
+.container .page-title {
   text-align: left;
 }
 
-/* Landing Page Background Image */
-/* body,
 html {
   height: 100%;
 }
@@ -56,4 +55,4 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}

@@ -57,9 +57,12 @@ class NewMoveForm extends React.Component {
     ];
     // debugger;
     this.props.submitHandler(requestBody);
-    this.setState = {
-      [e.target.name]: "",
-    };
+    e.target.reset();
+    this.setState({
+      [e.target[0].name]: "",
+      [e.target[1].name]: "",
+      [e.target[2].name]: "",
+    });
   };
 
   onChangeHandler = (e) => {
@@ -86,7 +89,6 @@ class NewMoveForm extends React.Component {
     let inventory = this.state.inventory;
     return (
       <div>
-        <h1>Schedule a New Move</h1>
         <form onSubmit={this.localSubmitHandler}>
           <label for="destination">Moving Destination</label>
           <input

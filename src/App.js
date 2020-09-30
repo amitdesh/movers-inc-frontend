@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import Welcome from "./welcome/welcome";
 import "./welcome/welcome.css";
+import Welcome from "./welcome/welcome";
 import SignupContainer from "./Containers/signupcontainer";
 import ProfileContainer from "./Containers/profilecontainer";
 import LoginContainer from "./Containers/logincontainer";
@@ -39,7 +39,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="landing-image">
         <Welcome />
         <Switch>
           <Route
@@ -56,7 +56,12 @@ class App extends React.Component {
           />
           <Route
             path="/profile"
-            render={() => <ProfileContainer profileData={this.state.user} />}
+            render={() => (
+              <ProfileContainer
+                profileData={this.state.user}
+                setUser={this.setUser}
+              />
+            )}
           />
         </Switch>
       </div>

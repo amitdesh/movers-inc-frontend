@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./welcome.css";
 
 class NavBar extends React.Component {
   render() {
     return (
       <div>
         <NavLink to="/welcome">
-          <h1>Movers Inc.</h1>
+          <h1 className="page-title">Movers Inc.</h1>
         </NavLink>
         <NavLink to="/login">
           <button className="button">
