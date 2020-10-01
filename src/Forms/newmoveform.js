@@ -100,7 +100,7 @@ class NewMoveForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <span>
         <h1>New Move Form</h1>
         <h3>Destination Details</h3>
         <form onSubmit={this.localSubmitHandler}>
@@ -151,7 +151,7 @@ class NewMoveForm extends React.Component {
                 <input
                   type="time"
                   min="08:00"
-                  max="18:00"
+                  max="20:00"
                   step="600"
                   required
                   name="time"
@@ -162,21 +162,24 @@ class NewMoveForm extends React.Component {
                 <br></br>
               </td>
             </tr>
-            <h3>Moving Inventory</h3>
-            <table className="inventory-table">
-              <th>
-                <h3>Item</h3>
-              </th>
-              <th>
-                <h3>Price</h3>
-              </th>
-              <th>
-                <h3>Quantity</h3>
-              </th>
-            </table>
-            {this.renderInventory()}
+          </table>
+          <h3>Moving Inventory</h3>
+          <table className="inventory-table">
+            <th>
+              <h4>Item</h4>
+            </th>
+            <th>
+              <h4>Price</h4>
+            </th>
+            <th>
+              <h4>Quantity</h4>
+            </th>
+          </table>
+          {this.renderInventory()}
+          <table className="destination-table">
             <tr>
               <td>
+                <br></br>
                 <button className="submit-btn" type="submit">
                   Submit Move Request
                 </button>
@@ -184,7 +187,7 @@ class NewMoveForm extends React.Component {
             </tr>
           </table>
         </form>
-      </div>
+      </span>
     );
   }
 }

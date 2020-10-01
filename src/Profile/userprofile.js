@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import NewMoveForm from "../Forms/newmoveform";
+import UpdateUserForm from "../Forms/updateuserform";
 import AptInfo from "../AptInfo/aptinfo";
 import "./userprofile.css";
 
@@ -71,59 +72,123 @@ class UserProfile extends React.Component {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        accept: "application/json",
         Authorization: `Bearer ${this.props.profileData.jwt}`,
       },
     };
-    fetch("http://localhost:3000/destinations/" + destID, options)
+    fetch("http://localhost:3000/destinations/" + destID, options).then(
+      (data) => {
+        let updatedDestination = this.state.destinations.filter(
+          (dest) => dest.id !== destID
+        );
+        this.setState({
+          destinations: updatedDestination,
+        });
+        this.props.history.push(`/profile`);
+      }
+    );
+  };
+
+  deleteUserHandler = () => {
+    let token = localStorage.getItem("token");
+    let options = {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    fetch(
+      "http://localhost:3000/users/" + this.props.profileData.user.id,
+      options
+    )
       .then((resp) => resp.json())
       .then((data) => {
-        if (data) {
-          let updatedDestination = this.state.destinations.filter(
-            (dest) => dest.id !== destID
-          );
-          this.setState({
-            destinations: updatedDestination,
-          });
-          this.props.history.push(`/profile`);
-        } else {
-          alert(
-            "Move delete request could not be submitted. Please try again."
-          );
-          this.props.history.push(`/profile`);
-        }
+        this.props.history.push(`/welcome`);
       });
   };
 
   render() {
-    console.log(this.state.inventories, this.props.profileData);
+    console.log("This is the profile data JWT", this.props.profileData);
     return this.props.profileData ? (
-      <div>
+      <span>
+        <h1>Welcome, {this.props.profileData.user.first_name}</h1>
         <div className="container-1">
-          <h1>Welcome, {this.props.profileData.user.first_name}</h1>
-          <div className="container-2">
-            <h3 className="section-title">Current Profile Details</h3>
-            <h4>Username: {this.props.profileData.user.username}</h4>
-            <h4>First Name: {this.props.profileData.user.first_name}</h4>
-            <h4>Last Name: {this.props.profileData.user.last_name}</h4>
-            <h4>
-              Current Address: {this.props.profileData.user.current_address}
-            </h4>
-            <h4>
-              Number of Rooms: {this.props.profileData.user.no_of_rooms}{" "}
-              rooms(s)
-            </h4>
-            <h4>Apartment Size: {this.props.profileData.user.house_SF} SF</h4>
-          </div>
+          <table className="login-form">
+            <tr>
+              <td>
+                <h3>Current Profile Details</h3>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="username">Username</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.username}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="first-name">First Name</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.first_name}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="last-name">Last Name</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.last_name}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="address">Current Address</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.current_address}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="no-of-rooms">Number of Rooms</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.no_of_rooms} rooms(s)</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="apt-size">Apartment Size</label>
+              </td>
+              <td>
+                <h4>{this.props.profileData.user.house_SF} SF</h4>
+              </td>
+            </tr>
+          </table>
         </div>
-        <br></br>
-        <div className="container-1">
-          <h3>Update User Profile Information</h3>
-          <h3>Create a New Mover Request</h3>
-          <NavLink to="/profile/newmoveform">
-            <button class="btn">Schedule a New Move</button>
+        <div className="container-2">
+          <h3>Profile Actions</h3>
+          <NavLink to="/profile/updateuser">
+            {/* <h4>
+              <button className="btn">Update User Profile Information</button>
+            </h4> */}
           </NavLink>
+          <NavLink to="/profile/newmoveform">
+            <h4>
+              <button className="btn">Schedule a New Move</button>
+            </h4>
+          </NavLink>
+          <h4>
+            <button className="btn" onClick={this.deleteUserHandler}>
+              Delete User Account
+            </button>
+          </h4>
         </div>
-        <br></br>
         <div className="container-2">
           <h3>Current Move Requests</h3>
           {this.displayNewMovingApts()}
@@ -139,8 +204,19 @@ class UserProfile extends React.Component {
               />
             )}
           />
+          <Route
+            path="/profile/updateuser"
+            render={() => (
+              <UpdateUserForm
+                submitHandler={this.submitHandler}
+                profileData={this.props.profileData}
+                inventory={this.state.inventories}
+                updateHandler={this.props.updateHandler}
+              />
+            )}
+          />
         </Switch>
-      </div>
+      </span>
     ) : (
       <h1>Profile is loading</h1>
     );

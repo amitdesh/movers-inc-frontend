@@ -2,14 +2,35 @@
   table-layout: fixed;
   width: 700px;
   text-align: left;
+  padding-left: 2%;
 }
 
 .destination-table {
   table-layout: fixed;
-  width: 1000px;
+  width: 925px;
   padding-left: 2%;
 }
 
-h3 {
-  text-align: left;
+.login-form {
+  table-layout: fixed;
+  width: 1000px;
+  padding-left: 2%;
+  padding-bottom: 2%;
+}
+
+.login-form h4 {
+  margin: 0;
+}
+
+.background {
+  background-color: cornsilk;
+  height: 100%;
+  width: 100%;
+}
+
+.container-2 {
+  border: black;
+  border-style: solid;
+  border-width: 2px;
+  margin-top: 1%;
 }

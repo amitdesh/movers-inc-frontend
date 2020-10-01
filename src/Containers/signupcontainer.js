@@ -33,7 +33,13 @@ class SignupContainer extends React.Component {
   };
 
   renderLoginForm = () => {
-    return <SignupForm submitHandler={this.signupHandler} />;
+    return (
+      <SignupForm
+        submitHandler={this.signupHandler}
+        logoutUser={this.props.logoutUser}
+        user={this.props.user}
+      />
+    );
   };
 
   render() {

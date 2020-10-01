@@ -18,6 +18,25 @@ class App extends React.Component {
     }));
   };
 
+  updateHandler = (userObj) => {
+    let options = {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        authorization: `Bearer ${userObj.jwt}`,
+      },
+      body: JSON.stringify({ user: userObj }),
+    };
+    fetch(`http://localhost:3000/users/${this.state.user.id}`, options)
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({
+          user: data,
+        });
+      });
+  };
+
   componentDidUpdate = () => {
     let userID = this.state.user.id;
     this.getUser(userID);
@@ -45,13 +64,21 @@ class App extends React.Component {
           <Route
             path="/login"
             render={() => (
-              <LoginContainer user={this.state.user} setUser={this.setUser} />
+              <LoginContainer
+                user={this.state.user}
+                setUser={this.setUser}
+                logoutUser={this.logoutUser}
+              />
             )}
           />
           <Route
             path="/signup"
             render={() => (
-              <SignupContainer user={this.state.user} setUser={this.setUser} />
+              <SignupContainer
+                user={this.state.user}
+                setUser={this.setUser}
+                logoutUser={this.logoutUser}
+              />
             )}
           />
           <Route
@@ -60,6 +87,7 @@ class App extends React.Component {
               <ProfileContainer
                 profileData={this.state.user}
                 setUser={this.setUser}
+                updateHandler={this.updateHandler}
               />
             )}
           />

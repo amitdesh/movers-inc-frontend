@@ -5,9 +5,11 @@ import "./welcome.css";
 class Welcome extends React.Component {
   render() {
     return (
-      <span className="container">
-        <NavBar />
-      </span>
+      <div class="background">
+        <span className="container">
+          <NavBar />
+        </span>
+      </div>
     );
   }
 }

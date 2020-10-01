@@ -25,7 +25,7 @@ class LoginContainer extends React.Component {
       .then((data) => {
         localStorage.setItem("token", data.jwt);
         this.props.setUser(data);
-        if (this.props.user) {
+        if (this.props.user.id === undefined) {
           this.props.history.push(`/profile`);
         } else {
           alert("Unable to log-in. Please try again");
@@ -35,7 +35,13 @@ class LoginContainer extends React.Component {
   };
 
   renderLoginForm = () => {
-    return <LoginForm loginHandler={this.loginHandler} />;
+    return (
+      <LoginForm
+        loginHandler={this.loginHandler}
+        logoutUser={this.props.logoutUser}
+        user={this.props.user}
+      />
+    );
   };
 
   render() {

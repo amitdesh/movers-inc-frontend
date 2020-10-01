@@ -1,7 +1,7 @@
 import React from "react";
 import "./newmoveform.css";
 
-class SignupForm extends React.Component {
+class UserUpdateForm extends React.Component {
   state = {
     username: "",
     first_name: "",
@@ -12,9 +12,9 @@ class SignupForm extends React.Component {
     house_SF: "",
   };
 
-  localSubmitHandler = (e) => {
+  localUpdateHandler = (e) => {
     e.preventDefault();
-    this.props.submitHandler(this.state);
+    this.props.updateHandler(this.state);
   };
 
   changeHandler = (e) => {
@@ -134,7 +134,7 @@ class SignupForm extends React.Component {
               <td>
                 <br></br>
                 <button className="submit-btn" type="submit">
-                  Create New Profile
+                  Update Profile Info
                 </button>
               </td>
             </tr>
@@ -145,4 +145,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+export default UserUpdateForm;
