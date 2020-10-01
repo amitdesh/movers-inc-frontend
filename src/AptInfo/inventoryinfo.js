@@ -1,4 +1,5 @@
 import React from "react";
+import "../welcome/welcome.css";
 
 class InventoryInfo extends React.Component {
   render() {

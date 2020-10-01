@@ -1,6 +1,7 @@
 import React from "react";
 import SignupForm from "../Forms/signupform";
 import { withRouter } from "react-router-dom";
+import "../welcome/welcome.css";
 
 class SignupContainer extends React.Component {
   signupHandler = (userObj) => {

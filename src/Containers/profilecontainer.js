@@ -1,5 +1,6 @@
 import React from "react";
 import UserProfile from "../Profile/userprofile";
+import "../welcome/welcome.css";
 
 class ProfileContainer extends React.Component {
   renderUserProfile = () => {
@@ -12,7 +13,11 @@ class ProfileContainer extends React.Component {
   };
 
   render() {
-    return <div>{this.renderUserProfile()}</div>;
+    return this.props.profileData ? (
+      <div>{this.renderUserProfile()}</div>
+    ) : (
+      <h2>Please log in to view profile page.</h2>
+    );
   }
 }
 export default ProfileContainer;

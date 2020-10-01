@@ -1,6 +1,5 @@
 import React from "react";
-import { NavLink, Switch, Route } from "react-router-dom";
-import InventoryInfo from "./inventoryinfo";
+import "../welcome/welcome.css";
 
 class AptInfo extends React.Component {
   localDeleteHandler = () => {
@@ -40,7 +39,9 @@ class AptInfo extends React.Component {
         <div id="inventory">
           <h2>Inventory List</h2>
           {this.iterateInventoryNames()} */}
-        <button onClick={this.localDeleteHandler}>Delete Move Request</button>
+        <button className="submit-btn" onClick={this.localDeleteHandler}>
+          Delete Move Request
+        </button>
       </div>
     );
   }

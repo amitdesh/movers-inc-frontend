@@ -5,26 +5,36 @@ import "./welcome.css";
 class NavBar extends React.Component {
   render() {
     return (
-      <div>
+      <ul>
         <NavLink to="/welcome">
-          <h1 className="page-title">Movers Inc.</h1>
+          <li>
+            <button className="button">
+              <h3>Home</h3>
+            </button>
+          </li>
         </NavLink>
         <NavLink to="/login">
-          <button className="button">
-            <h3>Login</h3>
-          </button>
+          <li className="li-button">
+            <button className="button">
+              <h3>Login</h3>
+            </button>
+          </li>
         </NavLink>
         <NavLink to="/signup">
-          <button className="button">
-            <h3>Sign-up</h3>
-          </button>
+          <li className="li-button">
+            <button className="button">
+              <h3>Sign-up</h3>
+            </button>
+          </li>
         </NavLink>
         <NavLink to="/profile">
-          <button className="button">
-            <h3>Profile Page</h3>
-          </button>
+          <li className="li-button">
+            <button className="button">
+              <h3>Profile Page</h3>
+            </button>
+          </li>
         </NavLink>
-      </div>
+      </ul>
     );
   }
 }

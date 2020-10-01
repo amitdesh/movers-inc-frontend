@@ -1,6 +1,7 @@
 import React from "react";
 import LoginForm from "../Forms/loginform";
 import { withRouter } from "react-router-dom";
+import "../welcome/welcome.css";
 
 class LoginContainer extends React.Component {
   loginHandler = (userObj) => {

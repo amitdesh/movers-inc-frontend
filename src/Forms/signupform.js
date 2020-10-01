@@ -1,4 +1,5 @@
 import React from "react";
+import "../welcome/welcome.css";
 
 class SignupForm extends React.Component {
   state = {
@@ -82,7 +83,9 @@ class SignupForm extends React.Component {
           value={this.state.house_SF}
           onChange={this.changeHandler}
         />
-        <button type="submit">Create New Profile</button>
+        <button className="submit-btn" type="submit">
+          Create New Profile
+        </button>
       </form>
     );
   }

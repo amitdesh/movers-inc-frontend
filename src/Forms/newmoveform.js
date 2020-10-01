@@ -1,4 +1,5 @@
 import React from "react";
+import "../welcome/welcome.css";
 
 class NewMoveForm extends React.Component {
   state = {
@@ -122,7 +123,9 @@ class NewMoveForm extends React.Component {
           />
           <h3>Moving Inventory</h3>
           <div>{this.renderInventory()}</div>
-          <button type="submit">Submit Move Request</button>
+          <button className="submit-btn" type="submit">
+            Submit Move Request
+          </button>
         </form>
       </div>
     );

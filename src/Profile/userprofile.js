@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import NewMoveForm from "../Forms/newmoveform";
 import AptInfo from "../AptInfo/aptinfo";
+import "../welcome/welcome.css";
 
 class UserProfile extends React.Component {
   state = {
@@ -70,7 +71,6 @@ class UserProfile extends React.Component {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
-        accepts: "application/json",
         Authorization: `Bearer ${this.props.profileData.jwt}`,
       },
     };

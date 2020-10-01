@@ -1,4 +1,5 @@
 import React from "react";
+import "../welcome/welcome.css";
 
 class LoginForm extends React.Component {
   state = {
@@ -42,7 +43,9 @@ class LoginForm extends React.Component {
           value={this.state.password}
           onChange={this.changeHandler}
         />
-        <button type="submit">Login</button>
+        <button className="submit-btn" type="submit">
+          Login
+        </button>
       </form>
     );
   }

@@ -39,7 +39,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="landing-image">
+      <span className="landing-image">
         <Welcome />
         <Switch>
           <Route
@@ -64,7 +64,7 @@ class App extends React.Component {
             )}
           />
         </Switch>
-      </div>
+      </span>
     );
   }
 }
