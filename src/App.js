@@ -24,11 +24,11 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         accepts: "application/json",
-        authorization: `Bearer ${userObj.jwt}`,
+        authorization: `Bearer ${this.state.user.jwt}`,
       },
       body: JSON.stringify({ user: userObj }),
     };
-    fetch(`http://localhost:3000/users/${this.state.user.id}`, options)
+    fetch(`http://localhost:3000/users/${this.state.user.user.id}`, options)
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
@@ -57,6 +57,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("This is the logged in user info", this.state.user);
     return (
       <span className="landing-image">
         <Welcome />

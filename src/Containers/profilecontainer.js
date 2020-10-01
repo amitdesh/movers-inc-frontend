@@ -8,6 +8,7 @@ class ProfileContainer extends React.Component {
       <UserProfile
         profileData={this.props.profileData}
         setUser={this.props.setUser}
+        updateHandler={this.props.updateHandler}
       />
     );
   };

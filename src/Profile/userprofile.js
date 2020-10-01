@@ -105,6 +105,7 @@ class UserProfile extends React.Component {
     )
       .then((resp) => resp.json())
       .then((data) => {
+        localStorage.setItem("token", "");
         this.props.history.push(`/welcome`);
       });
   };
