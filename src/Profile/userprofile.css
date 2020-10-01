@@ -1,0 +1,32 @@
+h1,
+h3,
+h4 {
+  padding-left: 2%;
+}
+
+.btn {
+  padding-left: 2%;
+  color: black;
+  font-weight: 200;
+  font-style: normal;
+  align-content: center;
+  justify-items: center;
+}
+
+.container-1 {
+  border: black;
+  border-style: solid;
+  border-width: 2px;
+  padding: 10px;
+}
+
+.container-2 {
+  border: slategray;
+  border-style: solid;
+  border-width: 2px;
+  padding: 10px;
+}
+
+.section-title {
+  text-decoration: underline;
+}

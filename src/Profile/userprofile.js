@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Route, Switch, withRouter } from "react-router-dom";
 import NewMoveForm from "../Forms/newmoveform";
 import AptInfo from "../AptInfo/aptinfo";
-import "../welcome/welcome.css";
+import "./userprofile.css";
 
 class UserProfile extends React.Component {
   state = {
@@ -94,20 +94,40 @@ class UserProfile extends React.Component {
       });
   };
 
-  inventoryLister = () => {};
-
   render() {
     console.log(this.state.inventories, this.props.profileData);
     return this.props.profileData ? (
       <div>
-        <h1>Welcome to Movers Inc, {this.props.profileData.user.username}</h1>
-        <h3>Current Profile Details</h3>
-        <h3>Create a New Mover Request</h3>
-        <NavLink to="/profile/newmoveform">
-          <button>Schedule a New Move</button>
-        </NavLink>
-        <h3>Current Move Requests</h3>
-        {this.displayNewMovingApts()}
+        <div className="container-1">
+          <h1>Welcome, {this.props.profileData.user.first_name}</h1>
+          <div className="container-2">
+            <h3 className="section-title">Current Profile Details</h3>
+            <h4>Username: {this.props.profileData.user.username}</h4>
+            <h4>First Name: {this.props.profileData.user.first_name}</h4>
+            <h4>Last Name: {this.props.profileData.user.last_name}</h4>
+            <h4>
+              Current Address: {this.props.profileData.user.current_address}
+            </h4>
+            <h4>
+              Number of Rooms: {this.props.profileData.user.no_of_rooms}{" "}
+              rooms(s)
+            </h4>
+            <h4>Apartment Size: {this.props.profileData.user.house_SF} SF</h4>
+          </div>
+        </div>
+        <br></br>
+        <div className="container-1">
+          <h3>Update User Profile Information</h3>
+          <h3>Create a New Mover Request</h3>
+          <NavLink to="/profile/newmoveform">
+            <button class="btn">Schedule a New Move</button>
+          </NavLink>
+        </div>
+        <br></br>
+        <div className="container-2">
+          <h3>Current Move Requests</h3>
+          {this.displayNewMovingApts()}
+        </div>
         <Switch>
           <Route
             path="/profile/newmoveform"

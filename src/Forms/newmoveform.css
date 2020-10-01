@@ -1,0 +1,15 @@
+.inventory-table {
+  table-layout: fixed;
+  width: 700px;
+  text-align: left;
+}
+
+.destination-table {
+  table-layout: fixed;
+  width: 1000px;
+  padding-left: 2%;
+}
+
+h3 {
+  text-align: left;
+}

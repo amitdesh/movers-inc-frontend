@@ -1,5 +1,5 @@
 import React from "react";
-import "../welcome/welcome.css";
+import "./newmoveform.css";
 
 class NewMoveForm extends React.Component {
   state = {
@@ -75,57 +75,114 @@ class NewMoveForm extends React.Component {
   renderInventory = () => {
     return this.state.inventory.map((inv) => {
       return (
-        <div>
-          <h3>{inv.name}</h3>
-          <h4>{inv.price}</h4>
-          <span>
-            <input type="number" name={inv.name} id={inv.id} />
-          </span>
-        </div>
+        <table className="inventory-table">
+          <tr>
+            <td>
+              <span>
+                <label for="inventory-name">{inv.name}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <label for="inventory-price">${inv.price}/item</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input type="number" name={inv.name} id={inv.id} />
+              </span>
+            </td>
+          </tr>
+        </table>
       );
     });
   };
 
   render() {
-    let inventory = this.state.inventory;
     return (
       <div>
+        <h1>New Move Form</h1>
+        <h3>Destination Details</h3>
         <form onSubmit={this.localSubmitHandler}>
-          <label for="destination">Moving Destination</label>
-          <input
-            type="text"
-            name="location"
-            required
-            placeholder="Enter Destination"
-            value={this.state.location}
-            onChange={this.onChangeHandler}
-          />
-          <label for="date">Moving Date</label>
-          <input
-            type="date"
-            name="date"
-            required
-            placeholder="Enter desired date of move"
-            value={this.state.date}
-            onChange={this.onChangeHandler}
-          />
-          <label for="time">Moving Time</label>
-          <input
-            type="time"
-            min="08:00"
-            max="18:00"
-            step="600"
-            required
-            name="time"
-            placeholder="Enter desired time slot"
-            value={this.state.time}
-            onChange={this.onChangeHandler}
-          />
-          <h3>Moving Inventory</h3>
-          <div>{this.renderInventory()}</div>
-          <button className="submit-btn" type="submit">
-            Submit Move Request
-          </button>
+          <table className="destination-table">
+            <tr>
+              <td>
+                <span>
+                  <label for="destination">Moving Destination</label>
+                </span>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="location"
+                  required
+                  placeholder="Enter Destination"
+                  value={this.state.location}
+                  onChange={this.onChangeHandler}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>
+                  <br></br>
+                  <label for="date">Moving Date</label>
+                </span>
+              </td>
+              <td>
+                <input
+                  type="date"
+                  name="date"
+                  required
+                  placeholder="Enter desired date of move"
+                  value={this.state.date}
+                  onChange={this.onChangeHandler}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>
+                  <br></br>
+                  <label for="time">Moving Time</label>
+                </span>
+              </td>
+              <td>
+                <input
+                  type="time"
+                  min="08:00"
+                  max="18:00"
+                  step="600"
+                  required
+                  name="time"
+                  placeholder="Enter desired time slot"
+                  value={this.state.time}
+                  onChange={this.onChangeHandler}
+                />
+                <br></br>
+              </td>
+            </tr>
+            <h3>Moving Inventory</h3>
+            <table className="inventory-table">
+              <th>
+                <h3>Item</h3>
+              </th>
+              <th>
+                <h3>Price</h3>
+              </th>
+              <th>
+                <h3>Quantity</h3>
+              </th>
+            </table>
+            {this.renderInventory()}
+            <tr>
+              <td>
+                <button className="submit-btn" type="submit">
+                  Submit Move Request
+                </button>
+              </td>
+            </tr>
+          </table>
         </form>
       </div>
     );
