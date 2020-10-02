@@ -13,6 +13,7 @@ class UserUpdateForm extends React.Component {
   };
 
   localUpdateHandler = (e) => {
+    console.log(e);
     e.preventDefault();
     this.props.updateHandler(this.state);
   };
@@ -28,7 +29,7 @@ class UserUpdateForm extends React.Component {
     return (
       <div>
         <h1>Sign-up For a User Profile</h1>
-        <form onSubmit={this.localSubmitHandler}>
+        <form onSubmit={this.localUpdateHandler}>
           <table className="login-form">
             <tr>
               <td>

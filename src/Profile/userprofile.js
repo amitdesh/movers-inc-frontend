@@ -67,6 +67,27 @@ class UserProfile extends React.Component {
     ));
   };
 
+  updateHandler = (userObj) => {
+    let options = {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+        authorization: `Bearer ${this.props.profileData.jwt}`,
+      },
+      body: JSON.stringify({ user: userObj }),
+    };
+    fetch(
+      `http://localhost:3000/users/${this.props.profileData.user.id}`,
+      options
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.props.setUser(data);
+        this.props.history.push(`/profile`);
+      });
+  };
+
   deleteHandler = (destID) => {
     let options = {
       method: "DELETE",
@@ -175,9 +196,9 @@ class UserProfile extends React.Component {
         <div className="container-2">
           <h3>Profile Actions</h3>
           <NavLink to="/profile/updateuser">
-            {/* <h4>
+            <h4>
               <button className="btn">Update User Profile Information</button>
-            </h4> */}
+            </h4>
           </NavLink>
           <NavLink to="/profile/newmoveform">
             <h4>
@@ -212,7 +233,7 @@ class UserProfile extends React.Component {
                 submitHandler={this.submitHandler}
                 profileData={this.props.profileData}
                 inventory={this.state.inventories}
-                updateHandler={this.props.updateHandler}
+                updateHandler={this.updateHandler}
               />
             )}
           />

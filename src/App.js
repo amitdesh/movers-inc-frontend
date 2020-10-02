@@ -18,25 +18,6 @@ class App extends React.Component {
     }));
   };
 
-  updateHandler = (userObj) => {
-    let options = {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-        authorization: `Bearer ${this.state.user.jwt}`,
-      },
-      body: JSON.stringify({ user: userObj }),
-    };
-    fetch(`http://localhost:3000/users/${this.state.user.user.id}`, options)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          user: data,
-        });
-      });
-  };
-
   componentDidUpdate = () => {
     let userID = this.state.user.id;
     this.getUser(userID);
