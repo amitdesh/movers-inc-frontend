@@ -180,7 +180,7 @@ class UserProfile extends React.Component {
                 <label for="no-of-rooms">Number of Rooms</label>
               </td>
               <td>
-                <h4>{this.props.profileData.user.no_of_rooms} rooms(s)</h4>
+                <h4>{this.props.profileData.user.no_of_rooms} room(s)</h4>
               </td>
             </tr>
             <tr>
