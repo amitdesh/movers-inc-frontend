@@ -123,12 +123,10 @@ class UserProfile extends React.Component {
     fetch(
       "http://localhost:3000/users/" + this.props.profileData.user.id,
       options
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        localStorage.setItem("token", "");
-        this.props.history.push(`/welcome`);
-      });
+    ).then((data) => {
+      localStorage.setItem("token", "");
+      this.props.history.push(`/welcome`);
+    });
   };
 
   render() {
